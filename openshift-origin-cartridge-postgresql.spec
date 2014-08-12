@@ -2,7 +2,7 @@
 
 Summary:       Provides embedded PostgreSQL support
 Name:          openshift-origin-cartridge-postgresql
-Version: 1.26.2.1
+Version:       1.26.2.1
 Release:       1%{?dist}
 Group:         Network/Daemons
 License:       ASL 2.0
@@ -10,13 +10,6 @@ URL:           http://www.openshift.com
 Source0:       http://mirror.openshift.com/pub/openshift-origin/source/%{name}/%{name}-%{version}.tar.gz
 Requires:      rubygem(openshift-origin-node)
 Requires:      openshift-origin-node-util
-%if 0%{?rhel} <=6
-Requires:      postgresql-ip4r
-Requires:      postgresql-jdbc
-%endif
-%if 0%{?fedora}%{?rhel} <= 6
-Requires:      postgresql < 9
-# PostgreSQL 9.2 with SCL
 Requires:      postgresql-server
 Requires:      postgresql-libs
 Requires:      postgresql-devel
@@ -24,21 +17,9 @@ Requires:      postgresql-contrib
 Requires:      postgresql-plperl
 Requires:      postgresql-plpython
 Requires:      postgresql-pltcl
-Requires:      postgis
 Requires:      pgRouting
-%endif
-%if 0%{?fedora} >= 19
-Requires:      postgresql >= 9.2
-Requires:      postgresql < 9.3
-Requires:      postgis >= 2
-%endif
-Requires:      postgresql-server
-Requires:      postgresql-libs
-Requires:      postgresql-devel
-Requires:      postgresql-contrib
-Requires:      postgresql-plperl
-Requires:      postgresql-plpython
-Requires:      postgresql-pltcl
+Requires:      postgresql90
+Requires:      postgis
 Requires:      PyGreSQL
 Requires:      perl-Class-DBI-Pg
 Requires:      perl-DBD-Pg
@@ -48,9 +29,8 @@ Requires:      php-pgsql
 Requires:      gdal
 Requires:      postgis
 Requires:      python-psycopg2
-Requires:      %{?scl_ruby:%scl_prefix_ruby}rubygem-pg
+Requires:      rubygem-pg
 Requires:      rhdb-utils
-Requires:      uuid-pgsql
 Requires:      proj-nad
 Provides:      openshift-origin-cartridge-postgresql-8.4 = 2.0.0
 Obsoletes:     openshift-origin-cartridge-postgresql-8.4 <= 1.99.9
@@ -66,7 +46,7 @@ Provides PostgreSQL cartridge support to OpenShift. (Cartridge Format V2)
 
 %build
 %__rm %{name}.spec
-
+Ã%__rm -r rel-eng
 
 %install
 %__mkdir -p %{buildroot}%{cartridgedir}
