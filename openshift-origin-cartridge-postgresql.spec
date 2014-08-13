@@ -2,7 +2,7 @@
 
 Summary:       Provides embedded PostgreSQL support
 Name:          openshift-origin-cartridge-postgresql
-Version:       1.26.2.2
+Version:       1.26.2.3
 Release:       1%{?dist}
 Group:         Network/Daemons
 License:       ASL 2.0
